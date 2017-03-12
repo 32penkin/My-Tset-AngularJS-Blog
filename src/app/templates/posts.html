@@ -1,5 +1,32 @@
-<h1>Posts</h1>
-
-<div ng-repeat="post in posts">
-  <a href="#/posts/{{post.id}}">{{post.name}}</a>
+<div class="container-fluid main-cont">
+  <div class="row">
+    <div class="col-md-3 profile">
+      <aside class="identif">
+        <img src="img/cat.jpg" alt="Cat image" class="img-circle">
+        <h4>Yauhen Penkin</h4>
+        <p>Junior podsos @PODSOSbl</p>
+        <hr>
+        <p>My pages:</p>
+        <ul>
+          <li><a href="https://www.facebook.com/penkin.evgeniy"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/32penkin/"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+          <li><a href="https://twitter.com/penkin.evgeniy"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+        </ul>
+      </aside>
+    </div>
+    <h3>There are {{posts.length}} posts:</h3>
+    <div class="col-md-8" ng-repeat="post in posts">
+      <article>
+        <header>
+          <h2>{{post.name}}</h2>
+        </header>
+        <footer><small>Posten on: {{post.date.toString()}}</small></footer>
+        <div class="lead">
+          {{post.content}}
+          <a href="#/posts/{{post.id}}">Read More</a>
+          <hr>
+        </div>
+      </article>
+    </div>
+  </div>
 </div>

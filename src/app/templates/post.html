@@ -1,2 +1,19 @@
-<h1>{{post.name}}</h1>
-<p>{{post.content}}</p>
+<div class="container for-post">
+  <div class="row">
+    <div class="col-md-8">
+      <article>
+        <header>
+          <h2>{{post.name}}</h2>
+        </header>
+        <p>{{post.content}}</p>
+      </article>
+    </div>
+    <div class="col-md-4">
+      <div id="comments">
+        <h3>Add new comment</h3>
+        <textarea></textarea>
+        <button>Add</button>
+      </div>
+    </div>
+  </div>
+</div>
