@@ -1,0 +1,13 @@
+$colortt: blue;
+
+.main {
+  margin-top: 100px;
+  .main-header {
+    color: $colortt;
+  }
+  .co-main {
+    h2 {
+      color: red;
+    }
+  }
+}

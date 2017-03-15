@@ -1,0 +1,81 @@
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+
+.navbar-right {
+  padding-right: 20px;
+}
+
+.login {
+  display: table;
+  max-width: 400px;
+  height: 100%; min-height: 100%;
+  margin-top: 170px;
+}
+
+.form-signin {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+.main-cont {
+  margin-top: 100px;
+}
+
+.profile aside p {
+  font-size: 12px;
+}
+
+.profile aside ul li {
+  float: left;
+  margin-right: 8px;
+}
+
+.profile aside ul li i {
+  font-size: 30px;
+  color: #a5a7aa;
+}
+
+.profile aside ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.profile aside ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.identif {
+  height: 100%;
+}
+
+
+.lead {
+  max-height: 100px;
+}
+
+
+.new-post {
+  margin-top: 100px;
+  display: table;
+  max-width: 500px;
+  height: 100%; min-height: 100%;
+}
+
+.home-page {
+  margin-top: 100px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.home-page .home ul {
+  margin-left: 140px;
+}
+
+
+
+.for-post {
+  margin-top: 100px;
+}
