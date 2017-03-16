@@ -1,6 +1,6 @@
 import _ from 'lodash';
 export const PostCtrlName = 'postCtrl';
-export const PostCtrl = ($scope, $routeParams, postsFactory) => {
+export const PostCtrl = ($scope, $routeParams, postsService) => {
   let postid = Number($routeParams.postId);
-  $scope.post = _.find(postsFactory, {id: postid});
+  $scope.post = _.find(postsService.getPostsList(), {id: postid});
 };

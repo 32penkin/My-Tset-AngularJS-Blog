@@ -10,16 +10,19 @@ import {HomeCtrlName, HomeCtrl} from './controllers/HomeController';
 import {PostsCtrlName, PostsCtrl} from './controllers/PostsController';
 import {NewPostCtrlName, NewPostCtrl} from './controllers/NewPostController';
 import {LoginCtrlName, LoginCtrl} from './controllers/LoginController';
-import {PostsFactName, PostsFact} from './factories/PostsFactory';
+import {PostsServiceName, PostsService} from './services/PostsService';
+import {CommentsServiceName, CommentService} from './services/CommentsService'
 import {AppConfig} from './configs/AppConfig';
 
 const app = angular.module('BlogApp', ['ngRoute', 'angularCSS']);
 
 app
+  .config(AppConfig)
+  .service(PostsServiceName, PostsService)
+  .factory(CommentsServiceName, CommentService)
   .controller(PostCtrlName, PostCtrl)
   .controller(HomeCtrlName, HomeCtrl)
   .controller(PostsCtrlName, PostsCtrl)
   .controller(NewPostCtrlName, NewPostCtrl)
-  .controller(LoginCtrlName, LoginCtrl)
-  .factory(PostsFactName, PostsFact)
-  .config(AppConfig);
+  .controller(LoginCtrlName, LoginCtrl);
+
