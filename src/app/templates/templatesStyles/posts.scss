@@ -1,13 +1,29 @@
-$colortt: blue;
-
-.main {
-  margin-top: 100px;
-  .main-header {
-    color: $colortt;
-  }
-  .co-main {
-    h2 {
-      color: red;
+body {
+  .main-cont {
+    max-width: 1000px;
+    margin-top: 100px;
+    .row {
+      .profile {
+        margin-right: 40px;
+        aside {
+          ul {
+            list-style: none;
+            padding: 0;
+            li {
+              float: left;
+              margin-right: 12px;
+              a {
+                i {
+                  font-size: 20px;
+                  color: #afb1b5;
+                }
+              }
+            }
+          }
+        }
+      }
+      .col-md-8 {}
     }
+
   }
 }
