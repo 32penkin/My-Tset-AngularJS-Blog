@@ -17,17 +17,27 @@ import NewPostStyle from 'style-loader!./templates/templatesStyles/newPost.scss'
 import LoginStyle from 'style-loader!./templates/templatesStyles/login.scss';
 
 import {PostComponentName, PostComponent} from './components/post'
+import {CommentComponentName, CommentComponent} from './components/comment'
 
 import {HomeCtrlName, HomeCtrl} from './controllers/HomeController';
 import {PostsCtrlName, PostsCtrl} from './controllers/PostsController';
 import {NewPostCtrlName, NewPostCtrl} from './controllers/NewPostController';
 import {LoginCtrlName, LoginCtrl} from './controllers/LoginController';
+
 import {PostsServiceName, PostsService} from './services/PostsService';
+import {CommentsServiceName, CommentsService} from'./services/CommentService'
 
 const app = angular.module('BlogApp', ['ngRoute', 'angularCSS']);
 
 app
   .component(PostComponentName, PostComponent)
+  .component(CommentComponentName, CommentComponent)
+  .service(PostsServiceName, PostsService)
+  .service(CommentsServiceName, CommentsService)
+  .controller(HomeCtrlName, HomeCtrl)
+  .controller(PostsCtrlName, PostsCtrl)
+  .controller(NewPostCtrlName, NewPostCtrl)
+  .controller(LoginCtrlName, LoginCtrl)
   .config(($locationProvider, $routeProvider) => {
     $locationProvider
       .html5Mode({
@@ -61,10 +71,5 @@ app
       .otherwise({
         template: `<span>404 no such page</span>`
       })
-  })
-  .service(PostsServiceName, PostsService)
-  .controller(HomeCtrlName, HomeCtrl)
-  .controller(PostsCtrlName, PostsCtrl)
-  .controller(NewPostCtrlName, NewPostCtrl)
-  .controller(LoginCtrlName, LoginCtrl);
+  });
 
