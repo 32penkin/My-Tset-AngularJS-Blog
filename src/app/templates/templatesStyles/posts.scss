@@ -5,6 +5,7 @@ body {
     .row {
       .profile {
         margin-right: 40px;
+        height: 100%;
         aside {
           ul {
             list-style: none;
@@ -22,8 +23,19 @@ body {
           }
         }
       }
-      .col-md-8 {}
-    }
+      .all-posts {
+        article {
+          .post-info {
 
+          }
+          .post-date {
+
+          }
+          .lead {
+
+          }
+        }
+      }
+    }
   }
 }

@@ -2,10 +2,12 @@ export const CommentsServiceName = 'commentsService';
 export const CommentsService = function () {
   let commentList = [];
   this.addComment = (commentatorName, commentCont, postID) => {
+    let d = new Date();
     if (commentatorName.trim() && commentCont.trim()) {
       commentList.push({
         name: commentatorName,
         content: commentCont,
+        date: d.toDateString() + ' ' + d.toLocaleTimeString(),
         id: postID
       });
     }

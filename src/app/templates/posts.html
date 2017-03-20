@@ -19,43 +19,25 @@
         </ul>
       </aside>
     </div>
-    <div class="col-md-8" ng-repeat="post in posts">
-      <article>
-        <header><a href="/posts/{{post.id}}"><h2>{{post.name}}</h2></a></header>
-        <footer>
-          <small>Posted on: {{post.date.toString()}}</small>
+    <h1 ng-if="posts.length === 0">There are no posts</h1>
+    <h1 ng-if="posts.length === 1">There are 1 post:</h1>
+    <h1 ng-if="posts.length !== 0 && posts.length !== 1">There are {{posts.length}} posts</h1>
+    <div class="col-md-8 all-posts">
+      <article ng-repeat="post in posts">
+        <header class="post-info"><a href="/posts/{{post.id}}"><h2>{{post.name}}</h2></a></header>
+        <footer class="post-date">
+          <small><b>Posted on: </b> {{post.date}}</small>
         </footer>
 
-        <div class="lead">{{post.content}}<a href="/posts/{{post.id}}">Read more</a>
+        <div class="lead">{{post.content}}<a href="/posts/{{post.id}}"> Read more</a>
         </div>
-        <footer>
-          <span class="label label-default">First</span>
-          <span class="label label-default">Second</span>
-          <span class="label label-default">Third</span>
-        </footer>
+        <!--<footer>-->
+          <!--<span class="label label-default">First</span>-->
+          <!--<span class="label label-default">Second</span>-->
+          <!--<span class="label label-default">Third</span>-->
+        <!--</footer>-->
         <hr>
       </article>
-
-      <!--<nav aria-label="Page navigation">-->
-        <!--<ul class="pagination">-->
-          <!--<li>-->
-            <!--<a href="#" aria-label="Previous">-->
-              <!--<span aria-hidden="true">&laquo;</span>-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<li><a href="#">1</a></li>-->
-          <!--<li><a href="#">2</a></li>-->
-          <!--<li><a href="#">3</a></li>-->
-          <!--<li><a href="#">4</a></li>-->
-          <!--<li><a href="#">5</a></li>-->
-          <!--<li>-->
-            <!--<a href="#" aria-label="Next">-->
-              <!--<span aria-hidden="true">&raquo;</span>-->
-            <!--</a>-->
-          <!--</li>-->
-        <!--</ul>-->
-      <!--</nav>-->
-
     </div>
   </div>
 </div>

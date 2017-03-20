@@ -4,7 +4,8 @@ export const CommentComponentName = 'comment';
 export const CommentComponent = {
   bindings: {
     name: '=',
-    content: '='
+    content: '=',
+    date: '='
   },
   templateUrl: CommentPostUrl,
   controller: function () {},

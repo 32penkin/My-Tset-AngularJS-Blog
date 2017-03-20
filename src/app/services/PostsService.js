@@ -5,13 +5,14 @@ export const PostsService = function () {
   this.findPost = (routeID) => {
     return _.find(postsList, {id: routeID});
   };
-  this.addPost = (newName, newContent, dateTime) => {
-    if(newName.trim() && newContent.trim() && dateTime) {
+  this.addPost = (newName, newContent) => {
+    let d = new Date();
+    if(newName.trim() && newContent.trim()) {
       postsList.push({
         id: postsList.length + 1,
         name: newName,
         content: newContent,
-        date: dateTime
+        date: d.toDateString() + ' ' + d.toLocaleTimeString()
       });
       newName = '';
       newContent = '';
