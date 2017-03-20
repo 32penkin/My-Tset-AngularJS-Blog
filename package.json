@@ -5,6 +5,7 @@
   "author": "Yauhen",
   "dependencies": {
     "angular": "^1.6.3",
+    "angular-css": "^1.0.8",
     "angular-route": "^1.6.3",
     "bootstrap": "^3.3.7",
     "font-awesome": "*",
