@@ -23,7 +23,8 @@
     <h1 ng-if="posts.length === 1">There are 1 post:</h1>
     <h1 ng-if="posts.length !== 0 && posts.length !== 1">There are {{posts.length}} posts</h1>
     <div class="col-md-8 all-posts">
-      <article ng-repeat="post in posts">
+      <!--<article ng-repeat="post in posts">-->
+      <article dir-paginate="post in posts | itemsPerPage: 2">
         <header class="post-info"><a href="/posts/{{post.id}}"><h2>{{post.name}}</h2></a></header>
         <footer class="post-date">
           <small><b>Posted on: </b> {{post.date}}</small>
@@ -31,13 +32,9 @@
 
         <div class="lead">{{post.content}}<a href="/posts/{{post.id}}"> Read more</a>
         </div>
-        <!--<footer>-->
-          <!--<span class="label label-default">First</span>-->
-          <!--<span class="label label-default">Second</span>-->
-          <!--<span class="label label-default">Third</span>-->
-        <!--</footer>-->
         <hr>
       </article>
+      <dir-pagination-controls></dir-pagination-controls>
     </div>
   </div>
 </div>

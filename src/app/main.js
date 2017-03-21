@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import angular from 'angular';
 import 'angular-route';
 import 'angular-css';
+import 'angular-utils-pagination';
 
 import TemplateHomeUrl from  'ngtemplate-loader!./templates/home.html';
 import TemplatePostsUrl from 'ngtemplate-loader!./templates/posts.html';
@@ -27,7 +28,11 @@ import {LoginCtrlName, LoginCtrl} from './controllers/LoginController';
 import {PostsServiceName, PostsService} from './services/PostsService';
 import {CommentsServiceName, CommentsService} from'./services/CommentService'
 
-const app = angular.module('BlogApp', ['ngRoute', 'angularCSS']);
+const app = angular.module('BlogApp', [
+  'ngRoute',
+  'angularCSS',
+  'angularUtils.directives.dirPagination'
+]);
 
 app
   .component(PostComponentName, PostComponent)
