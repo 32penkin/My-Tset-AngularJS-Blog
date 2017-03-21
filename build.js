@@ -54285,7 +54285,8 @@ var app = _angular2.default.module('BlogApp', ['ngRoute', 'angularCSS', 'angular
 
 app.component(_post3.PostComponentName, _post3.PostComponent).component(_comment.CommentComponentName, _comment.CommentComponent).service(_PostsService.PostsServiceName, _PostsService.PostsService).service(_CommentService.CommentsServiceName, _CommentService.CommentsService).controller(_HomeController.HomeCtrlName, _HomeController.HomeCtrl).controller(_PostsController.PostsCtrlName, _PostsController.PostsCtrl).controller(_NewPostController.NewPostCtrlName, _NewPostController.NewPostCtrl).controller(_LoginController.LoginCtrlName, _LoginController.LoginCtrl).config(function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode({
-    enabled: true
+    enabled: true,
+    requireBase: false
   });
   $routeProvider.when('/', {
     templateUrl: _home2.default,
