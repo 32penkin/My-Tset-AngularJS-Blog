@@ -54287,22 +54287,22 @@ app.component(_post3.PostComponentName, _post3.PostComponent).component(_comment
   $locationProvider.html5Mode({
     enabled: true
   });
-  $routeProvider.when('', {
+  $routeProvider.when('/', {
     templateUrl: _home2.default,
     controller: 'homeCtrl',
     css: _home4.default
-  }).when('posts', {
+  }).when('/posts', {
     templateUrl: _posts2.default,
     controller: 'postsCtrl',
     css: _posts4.default
-  }).when('posts/:postId', {
+  }).when('/posts/:postId', {
     template: '<post></post>',
     css: _post2.default
-  }).when('newPost', {
+  }).when('/newPost', {
     templateUrl: _newPost2.default,
     controller: 'newPostCtrl',
     css: _newPost4.default
-  }).when('login', {
+  }).when('/login', {
     templateUrl: _login2.default,
     controller: 'loginCtrl',
     css: _login4.default
