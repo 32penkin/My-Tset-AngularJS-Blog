@@ -511,9 +511,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var NewPostCtrlName = exports.NewPostCtrlName = 'newPostCtrl';
-var NewPostCtrl = exports.NewPostCtrl = function NewPostCtrl($scope, postsService) {
+var NewPostCtrl = exports.NewPostCtrl = function NewPostCtrl($scope, postsService, $location) {
   $scope.addNew = function () {
     postsService.addPost($scope.newName, $scope.newContent);
+    $location.path('/posts/' + postsService.getLenght());
   };
 };
 
@@ -587,6 +588,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PostsServiceName = exports.PostsServiceName = 'postsService';
 var PostsService = exports.PostsService = function PostsService() {
   var postsList = [];
+  postsList.push({
+    id: 1,
+    name: 'Donec sollicitudin molestie malesuada.',
+    content: 'Donec sollicitudin molestie malesuada. Curabitur non nulla sit amet nisl tempus convallis\n      quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.',
+    date: 'test date'
+  });
+  postsList.push({
+    id: 1,
+    name: 'Vestibulum ac diam sit amet quam vehicula.',
+    content: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; \n      Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
+    date: 'test date'
+  });
   this.findPost = function (routeID) {
     return _lodash2.default.find(postsList, { id: routeID });
   };
@@ -605,6 +618,9 @@ var PostsService = exports.PostsService = function PostsService() {
   };
   this.getPostsList = function () {
     return postsList;
+  };
+  this.getLenght = function () {
+    return postsList.length;
   };
 };
 
@@ -640,7 +656,7 @@ module.exports = path;
 /***/ (function(module, exports, __webpack_require__) {
 
 var path = 'D:/NWork/JS/Blogs/19/src/app/templates/posts.html';
-var html = "<body>\r\n\r\n<div class=\"container-fluid main-cont\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3 profile\">\r\n      <aside>\r\n        <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n        <h4>Yauhen Penkin</h4>\r\n        <p>Podsos eng. @PODSOS</p>\r\n        <hr>\r\n        <p>Share this page:</p>\r\n        <ul class=\"clearfix\">\r\n          <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n          <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"penkin.evgeniy@gmail.com\"><i class=\"fa fa-at\" aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </aside>\r\n    </div>\r\n    <h1 ng-if=\"posts.length === 0\">There are no posts</h1>\r\n    <h1 ng-if=\"posts.length === 1\">There are 1 post:</h1>\r\n    <h1 ng-if=\"posts.length !== 0 && posts.length !== 1\">There are {{posts.length}} posts</h1>\r\n    <div class=\"col-md-8 all-posts\">\r\n      <!--<article ng-repeat=\"post in posts\">-->\r\n      <article dir-paginate=\"post in posts | itemsPerPage: 2\">\r\n        <header class=\"post-info\"><a href=\"posts/{{post.id}}\"><h2>{{post.name}}</h2></a></header>\r\n        <footer class=\"post-date\">\r\n          <small><b>Posted on: </b> {{post.date}}</small>\r\n        </footer>\r\n\r\n        <div class=\"lead\">{{post.content}}<a href=\"/posts/{{post.id}}\"> Read more</a>\r\n        </div>\r\n        <hr>\r\n      </article>\r\n      <dir-pagination-controls></dir-pagination-controls>\r\n    </div>\r\n  </div>\r\n</div>\r\n</body>";
+var html = "<body>\r\n\r\n<div class=\"container-fluid main-cont\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3 profile\">\r\n      <aside>\r\n        <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n        <h4>Yauhen Penkin</h4>\r\n        <p>Podsos eng. @PODSOS</p>\r\n        <hr>\r\n        <p>Share this page:</p>\r\n        <ul class=\"clearfix\">\r\n          <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n          <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"penkin.evgeniy@gmail.com\"><i class=\"fa fa-at\" aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </aside>\r\n    </div>\r\n    <h1 ng-if=\"posts.length === 0\" class=\"posts-count-header\">There are no posts</h1>\r\n    <h1 ng-if=\"posts.length === 1\" class=\"posts-count-header\">There are 1 post:</h1>\r\n    <h1 ng-if=\"posts.length !== 0 && posts.length !== 1\" class=\"posts-count-header\">There are {{posts.length}}\r\n      posts</h1>\r\n    <div class=\"col-md-8 all-posts\">\r\n      <!--<article ng-repeat=\"post in posts\">-->\r\n      <article dir-paginate=\"post in posts | itemsPerPage: 3\">\r\n        <header class=\"post-info\"><a href=\"posts/{{post.id}}\"><h2>{{post.name}}</h2></a></header>\r\n        <footer class=\"post-date\">\r\n          <small><b>Posted on: </b> {{post.date}}</small>\r\n        </footer>\r\n\r\n        <div class=\"lead\">{{post.content}}<a href=\"/posts/{{post.id}}\"> Read more</a>\r\n        </div>\r\n        <hr>\r\n      </article>\r\n      <dir-pagination-controls></dir-pagination-controls>\r\n    </div>\r\n  </div>\r\n</div>\r\n</body>";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
 
@@ -36832,7 +36848,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px;\n    height: 100%; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n", ""]);
+exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px;\n    height: 100%; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .posts-count-header {\n    margin-left: 300px; }\n  body .main-cont .row .all-posts article hr {\n    color: #66686b;\n    height: 3px; }\n", ""]);
 
 // exports
 
