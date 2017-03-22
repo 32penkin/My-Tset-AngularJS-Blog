@@ -49,7 +49,7 @@ app
         enabled: true,
       });
     $routeProvider
-      .when('/', {
+      .when('/home', {
         templateUrl: TemplateHomeUrl,
         controller: 'homeCtrl',
         css: HomeStyle

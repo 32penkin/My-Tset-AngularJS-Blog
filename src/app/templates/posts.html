@@ -19,13 +19,14 @@
         </ul>
       </aside>
     </div>
-    <h1 ng-if="posts.length === 0">There are no posts</h1>
-    <h1 ng-if="posts.length === 1">There are 1 post:</h1>
-    <h1 ng-if="posts.length !== 0 && posts.length !== 1">There are {{posts.length}} posts</h1>
+    <h1 ng-if="posts.length === 0" class="posts-count-header">There are no posts</h1>
+    <h1 ng-if="posts.length === 1" class="posts-count-header">There are 1 post:</h1>
+    <h1 ng-if="posts.length !== 0 && posts.length !== 1" class="posts-count-header">There are {{posts.length}}
+      posts</h1>
     <div class="col-md-8 all-posts">
       <!--<article ng-repeat="post in posts">-->
-      <article dir-paginate="post in posts | itemsPerPage: 2">
-        <header class="post-info"><a href="/posts/{{post.id}}"><h2>{{post.name}}</h2></a></header>
+      <article dir-paginate="post in posts | itemsPerPage: 3">
+        <header class="post-info"><a href="posts/{{post.id}}"><h2>{{post.name}}</h2></a></header>
         <footer class="post-date">
           <small><b>Posted on: </b> {{post.date}}</small>
         </footer>

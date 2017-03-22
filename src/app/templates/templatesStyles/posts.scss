@@ -23,6 +23,9 @@ body {
           }
         }
       }
+      .posts-count-header {
+        margin-left: 300px;
+      }
       .all-posts {
         article {
           .post-info {
@@ -33,6 +36,10 @@ body {
           }
           .lead {
 
+          }
+          hr {
+            color: #66686b;
+            height: 3px;
           }
         }
       }
