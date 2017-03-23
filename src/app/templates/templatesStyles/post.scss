@@ -22,7 +22,18 @@ body {
           }
         }
       }
-      .col-md-8 {}
+      .col-md-8 {
+        .for-comments {
+          .row {
+            .comments {
+              margin-left: 16px;
+            }
+            form {
+              margin-left: 16px;
+            }
+          }
+        }
+      }
     }
 
   }

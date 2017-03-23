@@ -44,11 +44,18 @@ app
   .controller(NewPostCtrlName, NewPostCtrl)
   .controller(LoginCtrlName, LoginCtrl)
   .config(($locationProvider, $routeProvider) => {
-    $locationProvider
-      .html5Mode({
-        enabled: true,
-      });
+    // $locationProvider
+      // .html5Mode({
+      //   enabled: true,
+      //   requireBase: true,
+      //   rewriteLinks: true
+      // });
     $routeProvider
+      .when('/', {
+        templateUrl: TemplateHomeUrl,
+        controller: 'homeCtrl',
+        css: HomeStyle
+      })
       .when('/home', {
         templateUrl: TemplateHomeUrl,
         controller: 'homeCtrl',

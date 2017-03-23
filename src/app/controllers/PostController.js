@@ -6,6 +6,8 @@ export const PostCtrl = ($scope, $routeParams, postsService, commentsService) =>
   $scope.addNewComment = function() {
     commentsService.addComment($scope.comName, $scope.comCont, postid);
     $scope.comments = commentsService.getComments(postid);
+    $scope.comName = '';
+    $scope.comCont = '';
   };
   $scope.showComments = function () {
     console.log($scope.comments);
