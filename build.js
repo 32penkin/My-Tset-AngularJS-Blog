@@ -529,8 +529,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var PostsCtrlName = exports.PostsCtrlName = 'postsCtrl';
-var PostsCtrl = exports.PostsCtrl = function PostsCtrl($scope, postsService) {
+var PostsCtrl = exports.PostsCtrl = function PostsCtrl($scope, $routeParams, postsService, commentsService) {
   $scope.posts = postsService.getPostsList();
+  postsService.getPostsList().forEach(function (post) {
+    post.commentsCount = commentsService.getCommentsCount(post);
+  });
 };
 
 /***/ }),
@@ -553,14 +556,19 @@ var CommentsService = exports.CommentsService = function CommentsService() {
         name: commentatorName,
         content: commentCont,
         date: d.toDateString() + ' ' + d.toLocaleTimeString(),
-        id: postID
+        postAccessory: postID
       });
     }
   };
   this.getComments = function (postID) {
     return commentList.filter(function (item) {
-      return item.id === postID;
+      return item.postAccessory === postID;
     });
+  };
+  this.getCommentsCount = function (post) {
+    return commentList.filter(function (comment) {
+      return comment.postAccessory == post.id;
+    }).length;
   };
   this.getAllComments = function () {
     return commentList;
@@ -595,7 +603,7 @@ var PostsService = exports.PostsService = function PostsService() {
     date: 'test date'
   });
   postsList.push({
-    id: 1,
+    id: 2,
     name: 'Vestibulum ac diam sit amet quam vehicula.',
     content: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; \n      Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
     date: 'test date'
@@ -628,7 +636,7 @@ var PostsService = exports.PostsService = function PostsService() {
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/home.html';
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/home.html';
 var html = "<body>\r\n<div class=\"container home-page\">\r\n  <div class=\"profile home\">\r\n    <aside>\r\n      <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n      <h4>Yauhen Penkin</h4>\r\n      <p class=\"mn\">Junior podsos @PODSOSbl</p>\r\n      <hr>\r\n      <p>My pages:</p>\r\n      <ul>\r\n        <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a></li>\r\n        <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n        <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a></li>\r\n      </ul>\r\n    </aside>\r\n  </div>\r\n</div>\r\n</body>\r\n\r\n\r\n";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
@@ -637,7 +645,7 @@ module.exports = path;
 /* 17 */
 /***/ (function(module, exports) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/login.html';
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/login.html';
 var html = "<body>\r\n<div class=\"container login\">\r\n  <form class=\"form-signin\">\r\n    <h1 class=\"text-center\">Sign in</h1>\r\n    <p>\r\n      <label class=\"sr-only\">Email address</label>\r\n      <input type=\"email\" placeholder=\"Email address\" class=\"form-control\" required autofocus>\r\n    </p>\r\n\r\n    <p>\r\n      <label class=\"sr-only\">Password</label>\r\n      <input type=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n    </p>\r\n    <p class=\"checkbox\"><label><input type=\"checkbox\">Remember me</label></p>\r\n    <button type=\"submit\" class=\"btn btn-primary btn-block\">Sign in</button>\r\n  </form>\r\n</div>\r\n</body>\r\n";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
@@ -646,7 +654,7 @@ module.exports = path;
 /* 18 */
 /***/ (function(module, exports) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/newPost.html';
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/newPost.html';
 var html = "<body>\r\n<div class=\"container new-post\">\r\n  <form class=\"form-new-post\">\r\n    <h1 class=\"text-center\">Add new post</h1>\r\n    <p>\r\n      <label class=\"sr-only\">Add new post</label>\r\n      <input type=\"text\" placeholder=\"Name of the post\" class=\"form-control\" required autofocus ng-model=\"newName\">\r\n    </p>\r\n\r\n    <p>\r\n      <label class=\"sr-only\"></label>\r\n      <textarea class=\"form-control content-area\" required ng-model=\"newContent\"></textarea>\r\n    </p>\r\n    <button type=\"submit\" class=\"btn btn-primary btn-block\" ng-click=\"addNew()\">Add</button>\r\n  </form>\r\n</div>\r\n</body>";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
@@ -655,8 +663,8 @@ module.exports = path;
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/posts.html';
-var html = "<body>\r\n\r\n<div class=\"container-fluid main-cont\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3 profile\">\r\n      <aside>\r\n        <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n        <h4>Yauhen Penkin</h4>\r\n        <p>Podsos eng. @PODSOS</p>\r\n        <hr>\r\n        <p>Share this page:</p>\r\n        <ul class=\"clearfix\">\r\n          <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n          <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"penkin.evgeniy@gmail.com\"><i class=\"fa fa-at\" aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </aside>\r\n    </div>\r\n    <h1 ng-if=\"posts.length === 0\" class=\"posts-count-header\">There are no posts</h1>\r\n    <h1 ng-if=\"posts.length === 1\" class=\"posts-count-header\">There are 1 post:</h1>\r\n    <h1 ng-if=\"posts.length !== 0 && posts.length !== 1\" class=\"posts-count-header\">There are {{posts.length}}\r\n      posts</h1>\r\n    <div class=\"col-md-8 all-posts\">\r\n      <!--<article ng-repeat=\"post in posts\">-->\r\n      <article dir-paginate=\"post in posts | itemsPerPage: 3\">\r\n        <header class=\"post-info\"><a href=\"posts/{{post.id}}\"><h2>{{post.name}}</h2></a></header>\r\n        <footer class=\"post-date\">\r\n          <small><b>Posted on: </b> {{post.date}}</small>\r\n        </footer>\r\n\r\n        <div class=\"lead\">{{post.content}}<a href=\"/posts/{{post.id}}\"> Read more</a>\r\n        </div>\r\n        <hr>\r\n      </article>\r\n      <dir-pagination-controls></dir-pagination-controls>\r\n    </div>\r\n  </div>\r\n</div>\r\n</body>";
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/posts.html';
+var html = "<body>\r\n<div class=\"container-fluid main-cont\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3 profile\">\r\n      <aside>\r\n        <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n        <h4>Yauhen Penkin</h4>\r\n        <p>Podsos eng. @PODSOS</p>\r\n        <hr>\r\n        <!---------------------------for debugging---------------------------------->\r\n        <!--<button ng-click=\"showPosts()\">Show posts</button>-->\r\n        <!--<button ng-click=\"showPostsId()\">Show posts IDs</button>-->\r\n        <!--<button ng-click=\"showCommentsId()\">Show comments IDs</button>-->\r\n        <!--<button ng-click=\"CommentsCount()\">Show comments number</button>-->\r\n        <!------------------------------------------------------------->\r\n        <p>Share this page:</p>\r\n        <ul class=\"clearfix\">\r\n          <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n          <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"penkin.evgeniy@gmail.com\"><i class=\"fa fa-at\" aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </aside>\r\n    </div>\r\n    <div class=\"col-md-8 all-posts\">\r\n      <!--<article ng-repeat=\"post in posts\">-->\r\n      <h1 ng-if=\"posts.length === 0\" class=\"posts-count-header\">There are no posts</h1>\r\n      <h1 ng-if=\"posts.length === 1\" class=\"posts-count-header\">There are 1 post:</h1>\r\n      <h1 ng-if=\"posts.length !== 0 && posts.length !== 1\" class=\"posts-count-header\">There are {{posts.length}}\r\n        posts</h1>\r\n      <article dir-paginate=\"post in posts | itemsPerPage: 3\">\r\n      <!--<article ng-repeat=\"post in posts\">-->\r\n        <header class=\"post-info\"><a href=\"#!/posts/{{post.id}}\"><h2>{{post.name}}</h2></a></header>\r\n        <footer class=\"post-date\">\r\n          <small><b>Posted on: </b> {{post.date}}</small>\r\n          <br>\r\n          <small ng-if=\"post.commentsCount === 0\">Haven't commented yet</small>\r\n          <small ng-if=\"post.commentsCount === 1\">Commented <b>once</b></small>\r\n          <small ng-if=\"post.commentsCount !== 0 && post.commentsCount !== 1\">Commented <b>{{post.commentsCount}}</b> times</small>\r\n        </footer>\r\n\r\n        <div class=\"lead\">{{post.content}}<a href=\"#!/posts/{{post.id}}\"> Read more</a>\r\n        </div>\r\n        <hr>\r\n      </article>\r\n      <dir-pagination-controls></dir-pagination-controls>\r\n    </div>\r\n  </div>\r\n</div>\r\n</body>";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
 
@@ -36763,6 +36771,8 @@ var PostCtrl = exports.PostCtrl = function PostCtrl($scope, $routeParams, postsS
   $scope.addNewComment = function () {
     commentsService.addComment($scope.comName, $scope.comCont, postid);
     $scope.comments = commentsService.getComments(postid);
+    $scope.comName = '';
+    $scope.comCont = '';
   };
   $scope.showComments = function () {
     console.log($scope.comments);
@@ -36834,7 +36844,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n", ""]);
+exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .col-md-8 .for-comments .row .comments {\n    margin-left: 16px; }\n  body .main-cont .row .col-md-8 .for-comments .row form {\n    margin-left: 16px; }\n", ""]);
 
 // exports
 
@@ -36848,7 +36858,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px;\n    height: 100%; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .posts-count-header {\n    margin-left: 300px; }\n  body .main-cont .row .all-posts article hr {\n    color: #66686b;\n    height: 3px; }\n", ""]);
+exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px;\n    height: 100%; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .all-posts article hr {\n    color: #66686b;\n    height: 3px; }\n", ""]);
 
 // exports
 
@@ -54023,7 +54033,7 @@ module.exports = __webpack_require__.p + "fee66e712a8a08eef5805a46892932ad.woff"
 /* 50 */
 /***/ (function(module, exports) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/comment.html';
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/comment.html';
 var html = "<body>\r\n<p>{{$ctrl.content}}</p>\r\n<footer>\r\n  <small><b>{{$ctrl.name}}</b> {{$ctrl.date}}</small>\r\n</footer>\r\n<hr>\r\n</body>\r\n\r\n";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
@@ -54032,7 +54042,7 @@ module.exports = path;
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var path = 'D:/NWork/JS/Blogs/19/src/app/templates/post.html';
+var path = 'D:/NWork/JS/Blogs/20/src/app/templates/post.html';
 var html = "<div class=\"container-fluid main-cont\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3 profile\">\r\n      <aside>\r\n        <img src=\"" + __webpack_require__(2) + "\" alt=\"Cat image\" class=\"img-circle\">\r\n        <h4>Yauhen Penkin</h4>\r\n        <p>Podsos eng. @PODSOS</p>\r\n        <hr>\r\n        <p>Share this page:</p>\r\n        <ul class=\"clearfix\">\r\n          <li><a href=\"https://www.facebook.com/penkin.evgeniy\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"https://github.com/32penkin/\"><i class=\"fa fa-github\" aria-hidden=\"true\"></i></a></li>\r\n          <li><a href=\"https://twitter.com/penkin.evgeniy\"><i class=\"fa fa-twitter-square\" aria-hidden=\"true\"></i></a>\r\n          </li>\r\n          <li><a href=\"penkin.evgeniy@gmail.com\"><i class=\"fa fa-at\" aria-hidden=\"true\"></i></a></li>\r\n        </ul>\r\n      </aside>\r\n    </div>\r\n    <div class=\"col-md-8\">\r\n      <article>\r\n        <h1>{{post.name}}</h1>\r\n        <div class=\"lead\">{{post.content}}</div>\r\n      </article>\r\n      <hr class=\"line\">\r\n      <div class=\"for-comments\">\r\n        <h3 ng-if=\"comments.length !== 0\">Comments:</h3>\r\n        <div class=\"row\">\r\n          <div ng-repeat=\"comment in comments\" class=\"comments\">\r\n            <comment name=\"comment.name\" content=\"comment.content\" date=\"comment.date\"></comment>\r\n          </div>\r\n          <form>\r\n            <h3>Have your say</h3>\r\n            <p>\r\n              <label class=\"sr-only\">Message</label>\r\n              <textarea ng-model=\"comCont\" class=\"form-control\" placeholder=\"Message\" id=\"message\" required\r\n                        autocomplete=\"off\"></textarea>\r\n            </p>\r\n            <p>\r\n              <label class=\"sr-only\">Full Name</label>\r\n              <input ng-model=\"comName\" type=\"text\" class=\"form-control\" placeholder=\"Full Name\" required>\r\n            </p>\r\n            <!--<p>-->\r\n              <!--<label class=\"sr-only\">Email Address</label>-->\r\n              <!--<input type=\"email\" class=\"form-control\" placeholder=\"Email Address\" required>-->\r\n            <!--</p>-->\r\n            <p>\r\n              <button ng-click=\"addNewComment()\" class=\"btn btn-primary\">Send messsage</button>\r\n            </p>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>";
 window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 module.exports = path;
@@ -54300,10 +54310,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = _angular2.default.module('BlogApp', ['ngRoute', 'angularCSS', 'angularUtils.directives.dirPagination']);
 
 app.component(_post3.PostComponentName, _post3.PostComponent).component(_comment.CommentComponentName, _comment.CommentComponent).service(_PostsService.PostsServiceName, _PostsService.PostsService).service(_CommentService.CommentsServiceName, _CommentService.CommentsService).controller(_HomeController.HomeCtrlName, _HomeController.HomeCtrl).controller(_PostsController.PostsCtrlName, _PostsController.PostsCtrl).controller(_NewPostController.NewPostCtrlName, _NewPostController.NewPostCtrl).controller(_LoginController.LoginCtrlName, _LoginController.LoginCtrl).config(function ($locationProvider, $routeProvider) {
-  $locationProvider.html5Mode({
-    enabled: true
-  });
-  $routeProvider.when('/home', {
+  // $locationProvider
+  // .html5Mode({
+  //   enabled: true,
+  //   requireBase: true,
+  //   rewriteLinks: true
+  // });
+  $routeProvider.when('/', {
+    templateUrl: _home2.default,
+    controller: 'homeCtrl',
+    css: _home4.default
+  }).when('/home', {
     templateUrl: _home2.default,
     controller: 'homeCtrl',
     css: _home4.default
