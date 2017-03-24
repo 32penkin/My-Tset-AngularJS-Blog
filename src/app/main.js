@@ -5,6 +5,8 @@ import angular from 'angular';
 import 'angular-route';
 import 'angular-css';
 import 'angular-utils-pagination';
+import 'bootstrap';
+import 'jquery';
 
 import TemplateHomeUrl from  'ngtemplate-loader!./templates/home.html';
 import TemplatePostsUrl from 'ngtemplate-loader!./templates/posts.html';
