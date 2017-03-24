@@ -49545,7 +49545,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .col-md-8 .for-comments .row .comments {\n    margin-left: 16px; }\n  body .main-cont .row .col-md-8 .for-comments .row form {\n    margin-left: 16px; }\n", ""]);
+exports.push([module.i, "body .main-cont {\n  max-width: 1000px;\n  margin-top: 100px; }\n  body .main-cont .row .profile {\n    margin-right: 40px; }\n    body .main-cont .row .profile aside ul {\n      list-style: none;\n      padding: 0; }\n      body .main-cont .row .profile aside ul li {\n        float: left;\n        margin-right: 12px; }\n        body .main-cont .row .profile aside ul li a i {\n          font-size: 20px;\n          color: #afb1b5; }\n  body .main-cont .row .col-md-8 .for-comments .row .comments {\n    margin-left: 16px; }\n  body .main-cont .row .col-md-8 .for-comments .row form {\n    margin-left: 16px;\n    margin-right: 16px; }\n", ""]);
 
 // exports
 
