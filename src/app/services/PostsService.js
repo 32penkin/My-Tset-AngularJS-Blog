@@ -8,7 +8,7 @@ export const PostsService = function () {
       name: `Donec sollicitudin molestie malesuada.`,
       content: `Donec sollicitudin molestie malesuada. Curabitur non nulla sit amet nisl tempus convallis
       quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.`,
-      date: 'test date'
+      date: 'Wen Apr 13 2016 12:11:45'
     }
   );
   postsList.push(
@@ -17,7 +17,7 @@ export const PostsService = function () {
       name: `Vestibulum ac diam sit amet quam vehicula.`,
       content: `Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
       Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.`,
-      date: 'test date'
+      date: 'Mon Sep 22 2017 8:44:22'
     }
   );
   this.findPost = (routeID) => {

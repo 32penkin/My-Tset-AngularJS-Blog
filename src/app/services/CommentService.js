@@ -8,18 +8,18 @@ export const CommentsService = function () {
         name: commentatorName,
         content: commentCont,
         date: d.toDateString() + ' ' + d.toLocaleTimeString(),
-        postAccessory: postID
+        post_id: postID
       });
     }
   };
   this.getComments = (postID) => {
     return commentList.filter((item) => {
-      return item.postAccessory === postID;
+      return item.post_id === postID;
     });
   };
   this.getCommentsCount = (post) => {
     return commentList.filter((comment) => {
-      return comment.postAccessory == post.id;
+      return comment.post_id == post.id;
     }).length;
   };
   this.getAllComments = () => {
