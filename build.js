@@ -556,18 +556,18 @@ var CommentsService = exports.CommentsService = function CommentsService() {
         name: commentatorName,
         content: commentCont,
         date: d.toDateString() + ' ' + d.toLocaleTimeString(),
-        postAccessory: postID
+        post_id: postID
       });
     }
   };
   this.getComments = function (postID) {
     return commentList.filter(function (item) {
-      return item.postAccessory === postID;
+      return item.post_id === postID;
     });
   };
   this.getCommentsCount = function (post) {
     return commentList.filter(function (comment) {
-      return comment.postAccessory == post.id;
+      return comment.post_id == post.id;
     }).length;
   };
   this.getAllComments = function () {
@@ -600,13 +600,13 @@ var PostsService = exports.PostsService = function PostsService() {
     id: 1,
     name: 'Donec sollicitudin molestie malesuada.',
     content: 'Donec sollicitudin molestie malesuada. Curabitur non nulla sit amet nisl tempus convallis\n      quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.',
-    date: 'test date'
+    date: 'Wen Apr 13 2016 12:11:45'
   });
   postsList.push({
     id: 2,
     name: 'Vestibulum ac diam sit amet quam vehicula.',
     content: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; \n      Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
-    date: 'test date'
+    date: 'Mon Sep 22 2017 8:44:22'
   });
   this.findPost = function (routeID) {
     return _lodash2.default.find(postsList, { id: routeID });
